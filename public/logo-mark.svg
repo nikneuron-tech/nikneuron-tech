@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="nn-ribbon-diag" x1="175" y1="110" x2="365" y2="370" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="45%" stop-color="#1982ff" />
+      <stop offset="100%" stop-color="#5d2bff" />
+    </linearGradient>
+    <linearGradient id="nn-stem-left" x1="100" y1="150" x2="245" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="55%" stop-color="#12a8ff" />
+      <stop offset="100%" stop-color="#2952ff" />
+    </linearGradient>
+    <linearGradient id="nn-pillar-right" x1="310" y1="70" x2="355" y2="365" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00d9ff" />
+      <stop offset="40%" stop-color="#2563ff" />
+      <stop offset="100%" stop-color="#5b21ff" />
+    </linearGradient>
+    <linearGradient id="nn-fold-shadow" x1="305" y1="265" x2="355" y2="355" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#070918" stop-opacity="0" />
+      <stop offset="100%" stop-color="#070918" stop-opacity="0.48" />
+    </linearGradient>
+  </defs>
+
+  <!-- Right Vertical Pillar -->
+  <path
+    d="M 294 128 L 366 72 L 366 348 C 366 376 335 384 316 364 L 294 338 Z"
+    fill="url(#nn-pillar-right)"
+  />
+
+  <!-- Left Lower Stem & Neural Circuit Traces -->
+  <path
+    d="M 184 396 L 184 260 C 184 246 192 238 202 234 L 240 245 L 240 348 Z"
+    fill="url(#nn-stem-left)"
+  />
+  <!-- Circuit Trace 1 (Top) -->
+  <path
+    d="M 218 242 L 218 198 C 218 188 212 181 202 175 L 154 148"
+    stroke="#00eaff"
+    stroke-width="11"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <circle cx="144" cy="142" r="20" fill="#00eaff" />
+
+  <!-- Circuit Trace 2 (Middle) -->
+  <path
+    d="M 204 248 L 204 222 C 204 214 196 208 186 208 L 130 208"
+    stroke="#00dcff"
+    stroke-width="11"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <circle cx="116" cy="208" r="20" fill="#00dcff" />
+
+  <!-- Circuit Trace 3 (Bottom) -->
+  <path
+    d="M 192 256 L 192 248 C 192 242 184 238 176 244 L 146 270"
+    stroke="#00c4ff"
+    stroke-width="11"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <circle cx="138" cy="278" r="19" fill="#00c4ff" />
+
+  <!-- Diagonal Folded Ribbon -->
+  <path
+    d="M 182 126 C 170 112 178 90 198 88 C 210 86 222 92 232 104 L 362 328 C 372 346 364 374 342 378 C 328 380 314 374 302 358 L 182 126 Z"
+    fill="url(#nn-ribbon-diag)"
+  />
+  <path
+    d="M 284 260 L 362 328 C 372 346 364 374 342 378 C 328 380 314 374 302 358 Z"
+    fill="url(#nn-fold-shadow)"
+  />
+</svg>
+

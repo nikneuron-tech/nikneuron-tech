@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="mailBg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#241458" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#100a2c" stop-opacity="0.95"/>
+      <stop offset="85%" stop-color="#03020e" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#010105" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="coreAuraViolet" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#4fd8ff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#050618" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glowViolet" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Full-Bleed Dark Cyber Space Background -->
+  <rect width="1024" height="1024" fill="url(#mailBg)"/>
+
+  <!-- Center Atmospheric Core Aura -->
+  <circle cx="512" cy="420" r="280" fill="url(#coreAuraViolet)"/>
+
+  <!-- Particle Stream Paths -->
+  <g stroke="rgba(167, 139, 250, 0.18)" stroke-width="2.5" fill="none">
+    <path d="M 120 600 Q 512 180 900 440"/>
+    <path d="M 180 640 Q 512 240 860 500"/>
+    <path d="M 100 550 Q 512 120 920 380"/>
+  </g>
+
+  <!-- High-Speed Cascading Envelopes (Centered at 512, 420) -->
+  <g transform="translate(512, 420)" filter="url(#glowViolet)">
+    <!-- Envelope 1 (Top Left) -->
+    <g transform="translate(-160, -90) scale(0.85) rotate(-12)">
+      <rect x="-80" y="-55" width="160" height="110" rx="10" fill="rgba(35, 22, 70, 0.85)" stroke="#a78bfa" stroke-width="2.5"/>
+      <path d="M -80 -55 L 0 15 L 80 -55" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+    </g>
+
+    <!-- Envelope 2 (Top Right) -->
+    <g transform="translate(160, -65) scale(0.9) rotate(15)">
+      <rect x="-80" y="-55" width="160" height="110" rx="10" fill="rgba(35, 22, 70, 0.85)" stroke="#4fd8ff" stroke-width="2.5"/>
+      <path d="M -80 -55 L 0 15 L 80 -55" fill="none" stroke="#4fd8ff" stroke-width="2.5"/>
+    </g>
+
+    <!-- Main Hero Envelope (Center Focus) -->
+    <g transform="translate(0, 15)">
+      <rect x="-130" y="-85" width="260" height="170" rx="16" fill="rgba(24, 15, 55, 0.95)" stroke="#ffffff" stroke-width="3"/>
+      <path d="M -130 -85 L 0 20 L 130 -85" fill="none" stroke="#a78bfa" stroke-width="3.5"/>
+      <!-- Deliverability Checkmark Badge -->
+      <circle cx="0" cy="24" r="28" fill="#a78bfa" stroke="#ffffff" stroke-width="2.5"/>
+      <path d="M -10 24 L -3 31 L 11 16" fill="none" stroke="#050612" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Metric Badges in upper corner channels -->
+  <g transform="translate(240, 220)" font-family="sans-serif">
+    <text x="0" y="0" font-size="12" fill="#8b99bd" letter-spacing="1">THROUGHPUT</text>
+    <text x="0" y="26" font-size="22" font-weight="bold" fill="#a78bfa">5M+ / HR</text>
+  </g>
+
+  <g transform="translate(700, 220)" font-family="sans-serif">
+    <text x="0" y="0" font-size="12" fill="#8b99bd" letter-spacing="1">INBOX RATE</text>
+    <text x="0" y="26" font-size="22" font-weight="bold" fill="#4fd8ff">99.8%</text>
+  </g>
+</svg>

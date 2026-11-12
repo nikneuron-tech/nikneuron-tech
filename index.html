@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nikneuron | Interfaces for the World That’s Coming — Spatial Web & AI Engineering</title>
+    <meta
+      name="description"
+      content="Production-ready spatial 3D web systems, multi-agent AI verification pipelines, and full-stack engineering by Aditya Tamta. Built, not promised."
+    />
+    <meta name="author" content="Aditya Tamta" />
+    <meta name="theme-color" content="#050612" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nikneuron.com/" />
+    <meta property="og:title" content="Nikneuron | Interfaces for the World That’s Coming" />
+    <meta
+      property="og:description"
+      content="Spatial 3D graphics, multi-agent AI verification pipelines, and full-stack software built for production. Engineered by Aditya Tamta."
+    />
+    <meta property="og:image" content="/logo-hd.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nikneuron.com/" />
+    <meta name="twitter:title" content="Nikneuron | Interfaces for the World That’s Coming" />
+    <meta
+      name="twitter:description"
+      content="Spatial 3D web systems, multi-agent AI verification pipelines, and full-stack software built for production."
+    />
+    <meta name="twitter:image" content="/logo-hd.png" />
+
+    <!-- Preload Hero Assets -->
+    <link rel="preload" href="/nebula.jpg" as="image" />
+    <link rel="icon" type="image/png" href="/logo-mark-hd.png" />
+    <link rel="apple-touch-icon" href="/logo-hd.png" />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://nikneuron.com/#organization",
+            "name": "Nikneuron",
+            "url": "https://nikneuron.com/",
+            "logo": "https://nikneuron.com/nebula.jpg",
+            "description": "Bespoke spatial 3D web applications, multi-agent AI systems, and cloud infrastructure.",
+            "founder": {
+              "@type": "Person",
+              "name": "Aditya Tamta",
+              "jobTitle": "Founder & Creative Technologist"
+            }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://nikneuron.com/#founder",
+            "name": "Aditya Tamta",
+            "jobTitle": "Full-Stack Creative Technologist",
+            "worksFor": {
+              "@id": "https://nikneuron.com/#organization"
+            },
+            "sameAs": [
+              "https://github.com/adityatamta",
+              "https://linkedin.com/in/adityatamta",
+              "https://x.com/adityatamta"
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-void text-text-primary antialiased selection:bg-cyan-electric selection:text-void min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

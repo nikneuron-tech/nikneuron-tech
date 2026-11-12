@@ -1,0 +1,97 @@
+@import '@fontsource/unbounded/300.css';
+@import '@fontsource/unbounded/400.css';
+@import '@fontsource/unbounded/600.css';
+@import '@fontsource/unbounded/700.css';
+@import '@fontsource/unbounded/800.css';
+@import '@fontsource/manrope/300.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --void-bg: #050612;
+    --cyan-electric: #4fd8ff;
+    --pink-accent: #ff5aa5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--void-bg);
+    color: #e8fbff;
+    font-family: 'Manrope', -apple-system, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #ff5aa5;
+    color: #050612;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(79, 216, 255, 0.25);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 216, 255, 0.5);
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(10, 20, 50, 0.45);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(79, 216, 255, 0.2);
+  }
+
+  .glass-panel-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-panel-hover:hover {
+    border-color: rgba(79, 216, 255, 0.5);
+    background: rgba(16, 28, 68, 0.65);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(79, 216, 255, 0.15);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 12px rgba(79, 216, 255, 0.6);
+  }
+
+  .text-glow-pink {
+    text-shadow: 0 0 12px rgba(255, 90, 165, 0.6);
+  }
+
+  .animation-delay-1000 {
+    animation-delay: -1s;
+  }
+}
