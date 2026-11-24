@@ -11,6 +11,9 @@ import {
   Check,
   Loader2,
   X,
+  Wand2,
+  ArrowUp,
+  ArrowRight,
 } from 'lucide-react';
 import { soundEngine } from '../ui/audio';
 import { useAppStore } from '../../store/useAppStore';
@@ -19,7 +22,7 @@ import { ALL_SERVICES_CONFIG, BUNDLE_PACKAGES } from '../../config/services.conf
 const CALL_SLOTS = ['10:00 AM IST', '11:30 AM IST', '03:00 PM IST', '05:30 PM IST', '08:00 PM IST'];
 
 export const ContactSection: React.FC = () => {
-  const { preselectedInquiry, clearPreselectedInquiry, setLiveAnnouncement } = useAppStore();
+  const { preselectedInquiry, clearPreselectedInquiry, setLiveAnnouncement, openWizard } = useAppStore();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -279,6 +282,18 @@ export const ContactSection: React.FC = () => {
                   <span>Open in Email App</span>
                 </a>
 
+                <a
+                  href={`${SITE_CONFIG.contact.whatsappUrl}?text=${encodeURIComponent(
+                    `Hi Nikneuron, I'm ${submittedData.name} (${submittedData.email}). Service: ${submittedData.serviceType}. ${submittedData.message}`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-500/20 border border-emerald-400/60 text-emerald-300 hover:bg-emerald-500 hover:text-void transition-all"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>Send on WhatsApp</span>
+                </a>
+
                 <button
                   type="button"
                   onClick={handleCopyBrief}
@@ -319,7 +334,8 @@ export const ContactSection: React.FC = () => {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Alex Mercer"
+                    autoComplete="name"
+                    placeholder="e.g. Rahul Sharma"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-void-deep/90 border border-cyan-electric/30 text-white text-xs placeholder:text-text-dim focus:outline-none focus:ring-2 focus:ring-cyan-electric"
@@ -333,7 +349,8 @@ export const ContactSection: React.FC = () => {
                   <input
                     type="email"
                     required
-                    placeholder="alex@company.com"
+                    autoComplete="email"
+                    placeholder="rahul@business.in"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-void-deep/90 border border-cyan-electric/30 text-white text-xs placeholder:text-text-dim focus:outline-none focus:ring-2 focus:ring-cyan-electric"
@@ -408,6 +425,55 @@ export const ContactSection: React.FC = () => {
         </div>
       </div>
 
+      {/* Contact Section Quick Interlinking Navigation */}
+      <div className="mt-14 p-5 rounded-2xl bg-void-surface/60 border border-cyan-electric/20 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-4">
+        <span className="text-xs text-text-secondary text-center md:text-left">
+          Need to review our capabilities or run the recommendation engine before messaging?
+        </span>
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              soundEngine.playTone(700, 0.1);
+              openWizard();
+            }}
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-pink-accent/20 border border-pink-accent/50 text-pink-accent hover:bg-pink-accent hover:text-void transition-all flex items-center gap-1.5 cursor-pointer"
+          >
+            <Wand2 className="w-3.5 h-3.5" />
+            <span>Wizard</span>
+          </button>
+          <a
+            href="#services"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1"
+          >
+            <span>All Services</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#bundles"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1"
+          >
+            <span>Bundles</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#projects"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-electric/15 border border-cyan-electric/40 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all flex items-center gap-1"
+          >
+            <span>Case Studies</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#faq"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-text-secondary hover:text-white transition-all flex items-center gap-1"
+          >
+            <span>FAQ</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
       {/* Interactive 15-Minute Technical Call Scheduler Modal */}
       {isSchedulerOpen && (
         <div
@@ -462,11 +528,10 @@ export const ContactSection: React.FC = () => {
                         type="button"
                         key={day}
                         onClick={() => setSelectedDay(day)}
-                        className={`py-2 px-2 rounded-xl text-xs font-semibold border transition-all ${
-                          selectedDay === day
-                            ? 'bg-cyan-electric/20 border-cyan-electric text-cyan-electric'
-                            : 'bg-void-deep border-white/10 text-text-secondary hover:border-white/30'
-                        }`}
+                        className={`py-2 px-2 rounded-xl text-xs font-semibold border transition-all ${selectedDay === day
+                          ? 'bg-cyan-electric/20 border-cyan-electric text-cyan-electric'
+                          : 'bg-void-deep border-white/10 text-text-secondary hover:border-white/30'
+                          }`}
                       >
                         {day}
                       </button>
@@ -484,11 +549,10 @@ export const ContactSection: React.FC = () => {
                         type="button"
                         key={slot}
                         onClick={() => setSelectedSlot(slot)}
-                        className={`py-1.5 px-3 rounded-lg text-[11px] font-mono border transition-all ${
-                          selectedSlot === slot
-                            ? 'bg-pink-accent/20 border-pink-accent text-pink-accent font-bold'
-                            : 'bg-void-deep border-white/10 text-text-secondary hover:border-white/30'
-                        }`}
+                        className={`py-1.5 px-3 rounded-lg text-[11px] font-mono border transition-all ${selectedSlot === slot
+                          ? 'bg-pink-accent/20 border-pink-accent text-pink-accent font-bold'
+                          : 'bg-void-deep border-white/10 text-text-secondary hover:border-white/30'
+                          }`}
                       >
                         {slot}
                       </button>

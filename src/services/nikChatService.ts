@@ -1,12 +1,14 @@
 import { ALL_SERVICES_CONFIG, BUNDLE_PACKAGES } from '../config/services.config';
 import { SITE_CONFIG } from '../config/site.config';
 import { NIK_SITE_CONTEXT, NIK_SYSTEM_PROMPT } from '../config/nikPrompt';
+import { searchKnowledgeBase } from '../config/nikKnowledgeBase';
 
 export interface NikAction {
-  type: 'inquire' | 'inspect_face' | 'whatsapp' | 'scroll_services';
+  type: 'inquire' | 'inspect_face' | 'whatsapp' | 'scroll_services' | 'open_project';
   label: string;
   serviceId?: string;
   faceIndex?: number;
+  projectId?: string;
   brief?: string;
 }
 
@@ -124,7 +126,7 @@ Want me to help scope this for your business, or jump straight to an inquiry?`,
         },
         {
           type: 'inspect_face',
-          label: 'Inspect in 3D Cube',
+          label: 'Explore in 3D Cube',
           faceIndex: matched.faceIndex,
         },
       ],
@@ -492,6 +494,16 @@ export async function generateNikReply(
   // 4. Core capabilities aligned with Nik's persona
   const draft = buildDraftReply(input, lower, hinglish);
   if (draft) return draft;
+
+  // 5. Intelligent Knowledge Base Retrieval (Services, Bundles, Projects, Process, Engagement, FAQs, Code Recipes)
+  const kbMatches = searchKnowledgeBase(input, 1);
+  if (kbMatches.length > 0) {
+    const match = kbMatches[0];
+    return {
+      text: hinglish ? match.detailsHi : match.detailsEn,
+      actions: match.actions,
+    };
+  }
 
   const concept = buildConceptReply(lower, hinglish);
   if (concept) return concept;

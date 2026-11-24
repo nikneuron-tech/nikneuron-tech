@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { ArrowDown, ArrowRight, Minimize2, Box } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import { AsmrBackground } from './components/ui/asmr-background';
 import { CubeScene } from './components/cube/CubeScene';
 import { SearchBar } from './components/search/SearchBar';
@@ -7,9 +7,9 @@ import { CommandPalette } from './components/search/CommandPalette';
 import { HelpMeChooseWizard } from './components/wizard/HelpMeChooseWizard';
 import { CompareModal } from './components/decision/CompareModal';
 import { ResumeModal } from './components/modals/ResumeModal';
+import { ProjectDetailModal } from './components/projects/ProjectDetailModal';
 import { NikChatbot } from './components/chat/NikChatbot';
 import { FacePanel } from './components/faces/FacePanel';
-import { LaserIntro } from './components/intro/LaserIntro';
 import { FaceRail } from './components/navigation/FaceRail';
 import { OrientationGizmo } from './components/navigation/OrientationGizmo';
 import { ListViewFallback } from './components/views/ListViewFallback';
@@ -17,6 +17,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { TrustStrip } from './components/sections/TrustStrip';
 import { ServicesSection } from './components/sections/ServicesSection';
+import { ProjectsSection } from './components/sections/ProjectsSection';
 import { PlaygroundSection } from './components/sections/PlaygroundSection';
 import { ProcessSection } from './components/sections/ProcessSection';
 import { AboutSection } from './components/sections/AboutSection';
@@ -34,7 +35,6 @@ import { soundEngine } from './components/ui/audio';
 
 export const App: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [isDockedMinimized, setIsDockedMinimized] = useState(false);
 
   const {
     activeFaceIndex,
@@ -43,7 +43,6 @@ export const App: React.FC = () => {
     hasInteracted,
     liveAnnouncement,
     viewMode,
-    isCubeDocked,
   } = useAppStore();
 
   const frontService = getServiceByIndex(frontFaceIndex);
@@ -87,11 +86,16 @@ export const App: React.FC = () => {
         {/* Founder Resume / CV Modal */}
         <ResumeModal />
 
+        {/* Project Case Study Modal */}
+        <ProjectDetailModal />
+
         {/* Persistent Floating Nik Chatbot */}
         <NikChatbot />
 
-        {/* 1. Cinematic Opening Intro (Framer Motion) */}
-        <LaserIntro />
+        {/* Persistent 3D AI Receptionist Appointment Core */}
+        <div className="fixed bottom-5 left-4 sm:left-6 z-40 pointer-events-auto">
+          <OrientationGizmo />
+        </div>
 
         {/* 2. Sticky Top Glass Navigation Bar */}
         <Navbar />
@@ -100,64 +104,14 @@ export const App: React.FC = () => {
       {viewMode === 'cube' ? (
         <>
           {/* ========================================================= */}
-          {/* 3D CUBE CONTAINER: Fluid Fullscreen in Hero -> Smooth Sticky Companion on Scroll */}
+          {/* 3D CUBE CONTAINER: Fluid Fullscreen in Hero */}
           {/* ========================================================= */}
-          {isCubeDocked && isDockedMinimized ? (
-            <button
-              type="button"
-              onClick={() => {
-                soundEngine.playTone(620, 0.08);
-                setIsDockedMinimized(false);
-              }}
-              className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 px-3.5 py-2 rounded-full bg-void-deep/90 border border-cyan-electric/50 text-xs font-mono text-cyan-electric shadow-cyan-glow backdrop-blur-xl flex items-center gap-2 hover:bg-cyan-electric hover:text-void transition-all"
-              title="Expand 3D Companion Cube"
-            >
-              <Box className="w-3.5 h-3.5 animate-pulse" />
-              <span>Face 0{frontFaceIndex + 1}</span>
-            </button>
-          ) : (
-            <div
-              className={
-                isCubeDocked
-                  ? 'fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-30 w-28 h-28 sm:w-52 sm:h-52 rounded-2xl border border-cyan-electric/40 bg-void-deep/85 shadow-cyan-glow backdrop-blur-2xl overflow-hidden transition-all duration-500 pointer-events-auto group'
-                  : 'absolute top-0 left-0 right-0 h-screen z-10 pointer-events-auto overflow-hidden'
-              }
-              aria-label={isCubeDocked ? 'Docked 3D Companion Cube' : '3D Interactive Energy Cube'}
-            >
-              {/* Docked Companion Header Controls */}
-              {isCubeDocked && (
-                <div className="absolute top-1.5 left-1.5 right-1.5 z-40 flex items-center justify-between gap-1 pointer-events-none">
-                  <button
-                    onClick={() => {
-                      soundEngine.playTone(600, 0.1);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    title="Click to return to Hero"
-                    className="pointer-events-auto px-2 py-0.5 rounded-full bg-void/85 border border-cyan-electric/40 text-[9px] font-mono text-cyan-electric flex items-center gap-1 cursor-pointer hover:border-cyan-electric backdrop-blur-md truncate"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-pink-accent animate-pulse shrink-0" />
-                    <span className="hidden sm:inline">Face 0{frontFaceIndex + 1} · Re-center</span>
-                    <span className="sm:hidden">Top</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      soundEngine.playTone(500, 0.06);
-                      setIsDockedMinimized(true);
-                    }}
-                    title="Minimize docked cube"
-                    aria-label="Minimize docked cube"
-                    className="pointer-events-auto p-1 rounded-full bg-void/85 border border-white/15 text-text-dim hover:text-white hover:border-cyan-electric backdrop-blur-md"
-                  >
-                    <Minimize2 className="w-2.5 h-2.5" />
-                  </button>
-                </div>
-              )}
-
-              <CubeScene />
-            </div>
-          )}
+          <div
+            className="absolute top-0 left-0 right-0 h-screen z-10 pointer-events-auto overflow-hidden"
+            aria-label="3D Interactive Energy Cube"
+          >
+            <CubeScene />
+          </div>
 
           {/* ========================================================= */}
           {/* HERO SECTION */}
@@ -166,28 +120,29 @@ export const App: React.FC = () => {
             id="hero"
             className="relative z-20 min-h-[100dvh] w-full flex flex-col justify-between pt-20 sm:pt-24 pb-5 sm:pb-8 px-3 sm:px-8 max-w-7xl mx-auto pointer-events-none"
           >
-            {/* Hero Top Title & Search bar */}
-            <div className="flex flex-col items-center text-center mt-1 sm:mt-4 pointer-events-auto">
-              <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-cyan-electric px-3 py-1 rounded-full bg-cyan-electric/10 border border-cyan-electric/25 backdrop-blur-md shadow-cyan-glow mb-2.5 sm:mb-3">
-                Built, Not Promised
-              </span>
-              <h1 className="font-display text-xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-tight px-1">
-                {SITE_CONFIG.tagline}
+            {/* Hero Left-Hand Side Introduction (leaves center 3D Cube fully shown & unobstructed) */}
+            <div className="flex flex-col items-start text-left mt-1 sm:mt-4 pointer-events-auto max-w-xs sm:max-w-sm md:max-w-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-electric/10 border border-cyan-electric/25 backdrop-blur-md shadow-cyan-glow mb-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
+                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] text-cyan-electric font-semibold">
+                  Nikneuron Studio · Built, Not Promised
+                </span>
+              </div>
+
+              <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-white leading-tight">
+                Software & Autonomous AI Systems
               </h1>
-              <p className="text-xs sm:text-sm text-text-secondary max-w-xl mt-1.5 sm:mt-2 leading-relaxed px-2">
-                Spatial 3D graphics, multi-agent AI verification pipelines, and full-stack software built for production.
+
+              <p className="text-xs sm:text-[13px] text-text-secondary leading-relaxed mt-2 max-w-sm">
+                We engineer 24/7 AI receptionists, sub-second websites, and automated business workflows with direct founder engineering from Almora, Uttarakhand.
               </p>
 
-              {/* Center Search Bar on Desktop in Hero */}
-              <div className="w-full max-w-md mt-4 hidden sm:block">
+              {/* Search Bar on Left */}
+              <div className="w-full mt-3 hidden sm:block">
                 <SearchBar inputRef={searchInputRef} />
               </div>
             </div>
 
-            {/* Spatial Orientation Gizmo in Bottom-Left of Hero */}
-            <div className="absolute bottom-6 left-4 sm:left-6 z-20 pointer-events-auto hidden lg:block">
-              <OrientationGizmo />
-            </div>
 
             {/* Hero Bottom Dock: cleanly organized, zero overwriting */}
             <div className="relative z-20 flex flex-col items-center gap-2.5 sm:gap-3 w-full pointer-events-auto mt-auto pb-1 sm:pb-2">
@@ -233,14 +188,37 @@ export const App: React.FC = () => {
               {/* Face Rail Navigation in Hero */}
               <FaceRail />
 
-              {/* Bottom Scroll Cue */}
-              <button
-                onClick={handleScrollCue}
-                className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-text-secondary hover:text-cyan-electric bg-void-surface/60 border border-white/10 hover:border-cyan-electric/40 backdrop-blur-md transition-all group mt-1"
-              >
-                <span>Explore our services</span>
-                <ArrowDown className="w-3.5 h-3.5 text-cyan-electric animate-bounce" />
-              </button>
+              {/* Bottom Scroll Cue & Quick-Jump Links */}
+              <div className="flex flex-col sm:flex-row items-center gap-2 mt-1">
+                <button
+                  onClick={handleScrollCue}
+                  className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-text-secondary hover:text-cyan-electric bg-void-surface/60 border border-white/10 hover:border-cyan-electric/40 backdrop-blur-md transition-all group"
+                >
+                  <span>Explore services</span>
+                  <ArrowDown className="w-3.5 h-3.5 text-cyan-electric animate-bounce" />
+                </button>
+
+                <div className="flex items-center gap-1.5 text-[11px] font-mono">
+                  <a
+                    href="#bundles"
+                    className="px-2.5 py-1 rounded-full bg-void-surface/60 border border-white/10 hover:border-pink-accent hover:text-white text-text-dim transition-all"
+                  >
+                    Bundles
+                  </a>
+                  <a
+                    href="#projects"
+                    className="px-2.5 py-1 rounded-full bg-void-surface/60 border border-white/10 hover:border-cyan-electric hover:text-white text-text-dim transition-all"
+                  >
+                    Projects
+                  </a>
+                  <a
+                    href="#contact"
+                    className="px-2.5 py-1 rounded-full bg-cyan-electric/15 border border-cyan-electric/40 hover:bg-cyan-electric hover:text-void text-cyan-electric font-semibold transition-all"
+                  >
+                    Get in Touch →
+                  </a>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -257,7 +235,10 @@ export const App: React.FC = () => {
             {/* 2. Trust Telemetry Strip */}
             <TrustStrip />
 
-            {/* 3. Client-Side Live Playgrounds */}
+            {/* 3. Real Systems & Case Studies */}
+            <ProjectsSection />
+
+            {/* 4. Client-Side Live Playgrounds */}
             <PlaygroundSection />
 
             {/* 5. How We Work Timeline */}

@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
     <footer className="relative z-20 border-t border-cyan-electric/20 bg-void-deep/90 backdrop-blur-2xl text-white pt-16 pb-12 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Brand Info */}
           <div className="md:col-span-2 flex flex-col gap-3">
             <div className="flex items-center gap-3">
@@ -40,21 +40,51 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Solutions Column */}
           <div className="flex flex-col gap-2.5">
             <span className="text-xs font-mono uppercase text-cyan-electric tracking-wider font-semibold">
-              Navigation
+              Solutions
             </span>
             <div className="flex flex-col gap-1.5 text-xs text-text-secondary">
-              {SITE_CONFIG.navigation.map((nav) => (
-                <a
-                  key={nav.href}
-                  href={nav.href}
-                  className="hover:text-cyan-electric transition-colors"
-                >
-                  {nav.label}
-                </a>
-              ))}
+              <a href="#services" className="hover:text-cyan-electric transition-colors">
+                8 Core Services
+              </a>
+              <a href="#bundles" className="hover:text-cyan-electric transition-colors">
+                Turnkey Bundles
+              </a>
+              <a href="#hero" className="hover:text-cyan-electric transition-colors">
+                3D Living Tesseract
+              </a>
+              <a href="#playground" className="hover:text-cyan-electric transition-colors">
+                Live Interactive Demos
+              </a>
+              <a href="#contact" className="hover:text-cyan-electric transition-colors text-pink-accent">
+                Request Free Quote →
+              </a>
+            </div>
+          </div>
+
+          {/* Architecture & Process Column */}
+          <div className="flex flex-col gap-2.5">
+            <span className="text-xs font-mono uppercase text-cyan-electric tracking-wider font-semibold">
+              Engineering & Terms
+            </span>
+            <div className="flex flex-col gap-1.5 text-xs text-text-secondary">
+              <a href="#projects" className="hover:text-cyan-electric transition-colors">
+                Case Studies & Stacks
+              </a>
+              <a href="#process" className="hover:text-cyan-electric transition-colors">
+                4-Step Velocity Process
+              </a>
+              <a href="#about" className="hover:text-cyan-electric transition-colors">
+                About Aditya Tamta
+              </a>
+              <a href="#engagement" className="hover:text-cyan-electric transition-colors">
+                Engagement Frameworks
+              </a>
+              <a href="#faq" className="hover:text-cyan-electric transition-colors">
+                Frequently Asked Questions
+              </a>
             </div>
           </div>
 
@@ -67,6 +97,12 @@ export const Footer: React.FC = () => {
               Work directly with Aditya Tamta. Replies guaranteed within 24 hours.
             </p>
             <div className="flex flex-col gap-1 text-xs font-mono">
+              <a
+                href="#contact"
+                className="text-white hover:text-cyan-electric font-bold transition-colors"
+              >
+                Book 15-Min Technical Call →
+              </a>
               <a
                 href={`mailto:${SITE_CONFIG.contact.email}`}
                 className="text-cyan-electric hover:text-white transition-colors"

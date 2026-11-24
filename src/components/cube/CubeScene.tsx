@@ -464,7 +464,7 @@ export const CubeScene: React.FC = () => {
 
           <div className="flex items-center gap-1.5 pt-1 border-t border-white/10 text-[10px] text-text-dim">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-electric animate-pulse" />
-            <span>Click to inspect or press [{hoveredService.faceIndex + 1}]</span>
+            <span>Click to explore or press [{hoveredService.faceIndex + 1}]</span>
           </div>
         </div>
       )}

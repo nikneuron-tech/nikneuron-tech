@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/site.config';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Wand2, HelpCircle, ArrowDown } from 'lucide-react';
 import { soundEngine } from '../ui/audio';
 import { useAppStore } from '../../store/useAppStore';
 import { GradientSkewCard } from '../ui/gradient-card-showcase';
@@ -12,7 +12,7 @@ const ENGAGEMENT_GRADIENTS: Record<string, { from: string; to: string }> = {
 };
 
 export const EngagementSection: React.FC = () => {
-  const { startInquiry } = useAppStore();
+  const { startInquiry, openWizard } = useAppStore();
 
   const handleSelectOption = (optId: string, optTitle: string) => {
     soundEngine.playTone(600, 0.1);
@@ -110,6 +110,46 @@ export const EngagementSection: React.FC = () => {
             </GradientSkewCard>
           );
         })}
+      </div>
+
+      {/* Engagement Interlinking Transition */}
+      <div className="mt-14 p-6 rounded-2xl bg-void-surface/75 border border-cyan-electric/25 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-cyan-electric/15 border border-cyan-electric/30 flex items-center justify-center text-cyan-electric shrink-0">
+            <HelpCircle className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">Need Guidance on Scope or Terms?</h3>
+            <p className="text-xs text-text-secondary">Explore our FAQ for contract details, or use the interactive Wizard to find your best fit.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              soundEngine.playTone(700, 0.1);
+              openWizard();
+            }}
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-pink-accent to-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-pink-glow cursor-pointer"
+          >
+            <Wand2 className="w-3.5 h-3.5" />
+            <span>Recommendation Wizard</span>
+          </button>
+          <a
+            href="#faq"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+          >
+            <span>Read FAQ</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#contact"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric/20 border border-cyan-electric/50 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all"
+          >
+            Dispatch Inquiry →
+          </a>
+        </div>
       </div>
     </section>
   );

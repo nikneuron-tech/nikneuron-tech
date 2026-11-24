@@ -19,8 +19,14 @@ export default {
           subtle: 'rgba(79, 216, 255, 0.12)',
         },
         ice: '#e8fbff',
+        text: {
+          primary: '#f1f7ff',
+          secondary: '#b8cae4',
+          dim: '#8ba1c2',
+        },
         blue: {
           deep: '#0a3cff',
+          electric: '#2979ff',
         },
         pink: {
           accent: '#ff5aa5',
@@ -33,6 +39,7 @@ export default {
       },
       boxShadow: {
         'cyan-glow': '0 0 25px rgba(79, 216, 255, 0.4)',
+        'neon-cyan': '0 0 25px rgba(79, 216, 255, 0.45)',
         'cyan-lg': '0 0 45px rgba(79, 216, 255, 0.6)',
         'pink-glow': '0 0 25px rgba(255, 90, 165, 0.45)',
         'glass': '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(79, 216, 255, 0.15)',

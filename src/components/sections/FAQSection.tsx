@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SITE_CONFIG } from '../../config/site.config';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle, ArrowRight, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 import { soundEngine } from '../ui/audio';
 
 export const FAQSection: React.FC = () => {
@@ -61,6 +61,38 @@ export const FAQSection: React.FC = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* FAQ Interlinking Transition */}
+      <div className="mt-14 p-6 rounded-2xl bg-void-surface/75 border border-cyan-electric/25 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-pink-accent/15 border border-pink-accent/30 flex items-center justify-center text-pink-accent shrink-0">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">Have a Unique Question or Requirement?</h3>
+            <p className="text-xs text-text-secondary">Work directly with Aditya Tamta. Guaranteed reply within 24 hours.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 shrink-0">
+          <a
+            href="#contact"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-cyan-glow"
+          >
+            <span>Send Project Inquiry</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href={SITE_CONFIG.contact.whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 hover:bg-emerald-500 hover:text-void transition-all flex items-center gap-1.5"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>WhatsApp</span>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -4,7 +4,9 @@ import { useAppStore } from '../store/useAppStore';
 const SECTION_FACE_MAP: Record<string, number> = {
   hero: 4,        // AI Receptionist (+Z)
   services: 0,    // UI/UX & Web (+X)
+  bundles: 0,     // Bundles (+X)
   trust: 4,       // Core stats
+  projects: 2,    // Custom Software (+Y)
   playground: 0,  // Interactive UI demos
   process: 2,     // Custom Software (+Y)
   about: 5,       // AI & Chat Automation (-Z)

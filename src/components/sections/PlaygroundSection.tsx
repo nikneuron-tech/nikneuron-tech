@@ -10,6 +10,9 @@ import {
   RotateCcw,
   CalendarCheck,
   FileCheck2,
+  ArrowRight,
+  ArrowDown,
+  Layers,
 } from 'lucide-react';
 import { soundEngine } from '../ui/audio';
 import { GradientSkewCard } from '../ui/gradient-card-showcase';
@@ -614,6 +617,42 @@ export const PlaygroundSection: React.FC = () => {
             </form>
           </div>
         </GradientSkewCard>
+      </div>
+
+      {/* Playground Interlinking Transition */}
+      <div className="mt-14 p-6 rounded-2xl bg-void-surface/75 border border-cyan-electric/25 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-pink-accent/15 border border-pink-accent/30 flex items-center justify-center text-pink-accent shrink-0">
+            <Layers className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">From Interactive Sandbox to Shipped Production</h3>
+            <p className="text-xs text-text-secondary">See how we take proof-of-concepts through systematic milestones to full deployment.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <a
+            href="#process"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-cyan-glow"
+          >
+            <span>See 4-Step Process</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#services"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+          >
+            <span>All Services</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#contact"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-pink-accent/20 border border-pink-accent/50 text-pink-accent hover:bg-pink-accent hover:text-void transition-all"
+          >
+            Commission System →
+          </a>
+        </div>
       </div>
     </section>
   );

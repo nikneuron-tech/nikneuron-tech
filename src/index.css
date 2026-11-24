@@ -1,12 +1,4 @@
-@import '@fontsource/unbounded/300.css';
-@import '@fontsource/unbounded/400.css';
-@import '@fontsource/unbounded/600.css';
-@import '@fontsource/unbounded/700.css';
-@import '@fontsource/unbounded/800.css';
-@import '@fontsource/manrope/300.css';
 @import '@fontsource/manrope/400.css';
-@import '@fontsource/manrope/500.css';
-@import '@fontsource/manrope/600.css';
 @import '@fontsource/manrope/700.css';
 
 @tailwind base;
@@ -18,12 +10,35 @@
     --void-bg: #050612;
     --cyan-electric: #4fd8ff;
     --pink-accent: #ff5aa5;
+
+    /* Navbar Design Tokens */
+    --nav-h: 64px;
+    --nav-h-docked: 56px;
+    --nav-bg: rgba(5, 6, 18, 0.72);
+    --nav-border: rgba(255, 255, 255, 0.08);
+    --nav-text: rgba(255, 255, 255, 0.70);
+    --nav-text-active: #ffffff;
+    --accent: #4fd8ff;
+    --radius-pill: 9999px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     width: 100%;
+    font-size: 16px;
+  }
+
+  section[id],
+  div[id],
+  main[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid #4fd8ff;
+    outline-offset: 2px;
   }
 
   body {
@@ -31,8 +46,10 @@
     margin: 0;
     padding: 0;
     background-color: var(--void-bg);
-    color: #e8fbff;
-    font-family: 'Manrope', -apple-system, sans-serif;
+    color: #f1f7ff;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
     overflow-x: hidden;
     width: 100%;
   }
@@ -42,6 +59,19 @@
     width: 100%;
     position: relative;
     overflow-x: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #4fd8ff;
+    outline-offset: 2px;
   }
 
   ::selection {
@@ -54,13 +84,16 @@
     width: 6px;
     height: 6px;
   }
+
   ::-webkit-scrollbar-track {
     background: transparent;
   }
+
   ::-webkit-scrollbar-thumb {
     background: rgba(79, 216, 255, 0.25);
     border-radius: 999px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(79, 216, 255, 0.5);
   }
@@ -68,30 +101,72 @@
 
 @layer utilities {
   .glass-panel {
-    background: rgba(10, 20, 50, 0.45);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    border: 1px solid rgba(79, 216, 255, 0.2);
+    background: rgba(10, 20, 50, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(79, 216, 255, 0.22);
   }
 
   .glass-panel-hover {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
   .glass-panel-hover:hover {
     border-color: rgba(79, 216, 255, 0.5);
-    background: rgba(16, 28, 68, 0.65);
+    background: rgba(16, 28, 68, 0.7);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(79, 216, 255, 0.15);
   }
 
   .text-glow-cyan {
-    text-shadow: 0 0 12px rgba(79, 216, 255, 0.6);
+    text-shadow: 0 0 12px rgba(79, 216, 255, 0.5);
   }
 
   .text-glow-pink {
-    text-shadow: 0 0 12px rgba(255, 90, 165, 0.6);
+    text-shadow: 0 0 12px rgba(255, 90, 165, 0.5);
   }
 
   .animation-delay-1000 {
     animation-delay: -1s;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

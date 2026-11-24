@@ -4,7 +4,8 @@ import {
   BUNDLE_PACKAGES,
   ServiceConfig,
 } from '../../config/services.config';
-import { ArrowRight, CheckCircle, Calendar, Package, Layers } from 'lucide-react';
+import { getProjectById } from '../../config/projects.config';
+import { ArrowRight, CheckCircle, Calendar, Package, Layers, Zap, ArrowDown, HelpCircle, Briefcase, Box } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { soundEngine } from '../ui/audio';
 import { GradientSkewCard } from '../ui/gradient-card-showcase';
@@ -21,12 +22,23 @@ const SERVICE_SECONDARY_COLOR: Record<string, string> = {
 };
 
 export const ServicesSection: React.FC = () => {
-  const { selectFaceItem, rotateToFace, startInquiry } = useAppStore();
+  const {
+    selectFaceItem,
+    rotateToFace,
+    startInquiry,
+    setSelectedProjectId,
+    viewMode,
+    setViewMode,
+  } = useAppStore();
 
   const handleInspectService = (service: ServiceConfig) => {
     soundEngine.playSnapHolo();
+    if (viewMode === 'list') {
+      setViewMode('cube');
+    }
     rotateToFace(service.faceIndex);
     selectFaceItem(service.faceIndex, service.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -43,6 +55,38 @@ export const ServicesSection: React.FC = () => {
         <p className="text-xs sm:text-sm text-text-secondary max-w-2xl leading-relaxed">
           From UI/UX design and websites to AI receptionists, WhatsApp automation, and custom software — each service links directly to the 3D Living Tesseract.
         </p>
+
+        {/* Quick jump navigation between solution pages */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 text-xs font-mono">
+          <a
+            href="#bundles"
+            className="px-3 py-1 rounded-full bg-pink-accent/10 border border-pink-accent/30 text-pink-accent hover:bg-pink-accent hover:text-void transition-all flex items-center gap-1"
+          >
+            <span>Jump to Bundles</span>
+            <ArrowDown className="w-3 h-3" />
+          </a>
+          <a
+            href="#projects"
+            className="px-3 py-1 rounded-full bg-cyan-electric/10 border border-cyan-electric/30 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all flex items-center gap-1"
+          >
+            <span>View Case Studies</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+          <a
+            href="#engagement"
+            className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-secondary hover:text-white transition-all flex items-center gap-1"
+          >
+            <span>Engagement Models</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+          <a
+            href="#contact"
+            className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-emerald-300 hover:text-white transition-all flex items-center gap-1"
+          >
+            <span>Direct Inquiry</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+        </div>
       </div>
 
       {/* Grid of 8 Services with Skewed Gradient Cards */}
@@ -100,7 +144,7 @@ export const ServicesSection: React.FC = () => {
                 </ul>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-3">
                   {service.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
@@ -110,17 +154,59 @@ export const ServicesSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
+
+                {/* Proven Project Link */}
+                {service.projectIds && service.projectIds.length > 0 && (() => {
+                  const proj = getProjectById(service.projectIds[0]);
+                  if (!proj) return null;
+                  return (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProjectId(proj.id)}
+                      className="w-full text-left p-2 rounded-lg bg-void/60 border border-white/5 hover:border-cyan-electric/40 mb-4 flex items-center justify-between text-[11px] font-mono group/p cursor-pointer"
+                    >
+                      <span className="text-text-dim truncate">
+                        Case Study: <strong className="text-text-secondary group-hover/p:text-cyan-electric font-normal">{proj.title}</strong>
+                      </span>
+                      <span className="text-cyan-electric text-[10px] shrink-0 ml-1">→</span>
+                    </button>
+                  );
+                })()}
               </div>
 
               {/* Action Buttons */}
               <div className="flex items-center gap-2 pt-3 border-t border-white/10">
                 <button
+                  type="button"
                   onClick={() => handleInspectService(service)}
-                  className="flex-1 min-h-[40px] py-2 px-3 rounded-xl text-[11px] font-bold uppercase tracking-wider bg-white text-void hover:bg-[#ffcf4d] transition-all flex items-center justify-center gap-1.5 shadow-md"
+                  title={`Explore ${service.title} in Interactive 3D Cube`}
+                  className="relative group/btn flex-1 min-h-[42px] py-2 px-3.5 rounded-xl text-[11px] font-bold uppercase tracking-wider overflow-hidden transition-all duration-300 flex items-center justify-center gap-2 text-white shadow-lg cursor-pointer bg-void-surface/80 hover:scale-[1.02] active:scale-[0.98]"
+                  style={{
+                    borderColor: `${service.accentColor}90`,
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    boxShadow: `0 4px 18px -4px ${service.accentColor}40`,
+                  }}
                 >
-                  <span>Inspect 3D</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  {/* Subtle Shimmer Sweep */}
+                  <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+
+                  {/* 3D Holographic Cube Icon */}
+                  <Box
+                    className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:rotate-12 group-hover/btn:scale-110 shrink-0"
+                    style={{ color: service.accentColor }}
+                  />
+
+                  <span className="font-display font-semibold text-white tracking-wide">
+                    Explore in 3D
+                  </span>
+
+                  <ArrowRight
+                    className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1 shrink-0"
+                    style={{ color: service.accentColor }}
+                  />
                 </button>
+
                 <button
                   type="button"
                   onClick={() => {
@@ -131,7 +217,7 @@ export const ServicesSection: React.FC = () => {
                     });
                   }}
                   title={`Inquire about ${service.title}`}
-                  className="min-h-[40px] py-2 px-3 rounded-xl text-xs font-bold bg-cyan-electric/15 border border-cyan-electric/45 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all flex items-center justify-center gap-1.5"
+                  className="min-h-[42px] py-2 px-3 rounded-xl text-xs font-bold bg-cyan-electric/15 border border-cyan-electric/45 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Inquire</span>
@@ -140,6 +226,35 @@ export const ServicesSection: React.FC = () => {
             </GradientSkewCard>
           );
         })}
+      </div>
+
+      {/* Mid-Section Transition Banner */}
+      <div className="mt-10 p-5 rounded-2xl bg-void-surface/60 border border-cyan-electric/20 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-pink-accent/15 border border-pink-accent/30 flex items-center justify-center text-pink-accent shrink-0">
+            <Package className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">Need a Complete Turnkey Combination?</h3>
+            <p className="text-xs text-text-secondary">Combine websites, WhatsApp automation, and custom software into pre-packaged bundles.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2.5 shrink-0">
+          <a
+            href="#bundles"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-pink-accent text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-pink-glow"
+          >
+            <span>Explore Bundles</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#projects"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+          >
+            <span>All Case Studies</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
       </div>
 
       {/* Bundle Packages Subsection */}
@@ -227,6 +342,37 @@ export const ServicesSection: React.FC = () => {
               </button>
             </GradientSkewCard>
           ))}
+        </div>
+
+        {/* Post-Bundle Interlinking Bar */}
+        <div className="mt-12 p-5 rounded-2xl bg-gradient-to-r from-void-surface/90 to-void-deep/90 border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Briefcase className="w-5 h-5 text-cyan-electric shrink-0" />
+            <span className="text-xs sm:text-sm text-text-secondary">
+              Looking for milestone-based delivery, dedicated retainers, or have questions about source code ownership?
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <a
+              href="#engagement"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-electric/15 border border-cyan-electric/40 text-cyan-electric hover:bg-cyan-electric hover:text-void transition-all"
+            >
+              Engagement Models →
+            </a>
+            <a
+              href="#faq"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-text-secondary hover:text-white transition-all flex items-center gap-1"
+            >
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>FAQ</span>
+            </a>
+            <a
+              href="#contact"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 hover:bg-emerald-500 hover:text-void transition-all"
+            >
+              Contact Us →
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -278,10 +278,13 @@ export const SITE_CONFIG: SiteConfig = {
   navigation: [
     { label: 'Overview', href: '#hero' },
     { label: 'Services', href: '#services' },
+    { label: 'Bundles', href: '#bundles' },
+    { label: 'Projects', href: '#projects' },
     { label: 'Playground', href: '#playground' },
     { label: 'Process', href: '#process' },
     { label: 'About', href: '#about' },
     { label: 'Engagement', href: '#engagement' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ],
 };

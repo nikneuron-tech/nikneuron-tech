@@ -4,6 +4,7 @@ import { ALL_SERVICES_CONFIG, BUNDLE_PACKAGES, ServiceConfig, getServiceByIndex 
 import { useAppStore } from '../../store/useAppStore';
 import { soundEngine } from '../ui/audio';
 import { TrustStrip } from '../sections/TrustStrip';
+import { ProjectsSection } from '../sections/ProjectsSection';
 import { PlaygroundSection } from '../sections/PlaygroundSection';
 import { ProcessSection } from '../sections/ProcessSection';
 import { AboutSection } from '../sections/AboutSection';
@@ -62,7 +63,7 @@ export const ListViewFallback: React.FC = () => {
 
   return (
     <main
-      id="main-content"
+      id="services"
       role="main"
       className="relative w-full h-full overflow-y-auto px-4 md:px-12 py-24 bg-void text-white font-body selection:bg-pink-accent selection:text-void"
     >
@@ -258,7 +259,7 @@ export const ListViewFallback: React.FC = () => {
                     onClick={() => handleInspectIn3D(service)}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl font-display text-xs font-bold text-void bg-cyan-electric hover:bg-cyan-electric/90 shadow-cyan-glow transition-all"
                   >
-                    <span>Inspect in 3D Cube</span>
+                    <span>Explore in 3D Cube</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
 
@@ -283,7 +284,7 @@ export const ListViewFallback: React.FC = () => {
         </div>
 
         {/* Bundle Packages */}
-        <div className="flex flex-col gap-6 pt-6 border-t border-white/10">
+        <div id="bundles" className="flex flex-col gap-6 pt-6 border-t border-white/10">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-xs uppercase tracking-widest text-pink-accent font-bold">
               Bundle Packages
@@ -335,6 +336,7 @@ export const ListViewFallback: React.FC = () => {
         {/* 2D Mode Content Sections Parity */}
         <div className="flex flex-col gap-12 mt-8 pt-8 border-t border-white/10">
           <TrustStrip />
+          <ProjectsSection />
           <PlaygroundSection />
           <ProcessSection />
           <AboutSection />

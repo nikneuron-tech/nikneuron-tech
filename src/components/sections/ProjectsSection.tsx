@@ -1,6 +1,6 @@
 import React from 'react';
 import { PROJECTS_CONFIG } from '../../config/projects.config';
-import { ExternalLink, Github, CheckCircle2, Info } from 'lucide-react';
+import { ExternalLink, Github, CheckCircle2, Info, ArrowRight, ArrowDown, Sparkles } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { soundEngine } from '../ui/audio';
 import { GradientSkewCard } from '../ui/gradient-card-showcase';
@@ -160,6 +160,42 @@ export const ProjectsSection: React.FC = () => {
             </GradientSkewCard>
           );
         })}
+      </div>
+
+      {/* Projects Interlinking Footer */}
+      <div className="mt-14 p-6 rounded-2xl bg-void-surface/75 border border-cyan-electric/25 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-cyan-electric/15 border border-cyan-electric/30 flex items-center justify-center text-cyan-electric shrink-0">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">Experience These Architectures Live</h3>
+            <p className="text-xs text-text-secondary">Run real-time idea stress tests, cryptographic hashing, and AI dialogue flows in our sandbox.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <a
+            href="#playground"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-cyan-glow"
+          >
+            <span>Try Interactive Sandboxes</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#process"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+          >
+            <span>How We Build</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#contact"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-pink-accent/20 border border-pink-accent/50 text-pink-accent hover:bg-pink-accent hover:text-void transition-all"
+          >
+            Start Your Project →
+          </a>
+        </div>
       </div>
     </section>
   );

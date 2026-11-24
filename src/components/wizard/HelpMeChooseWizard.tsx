@@ -232,11 +232,10 @@ export const HelpMeChooseWizard: React.FC = () => {
                 {[1, 2, 3].map((s) => (
                   <div key={s} className="flex-1 flex flex-col gap-1">
                     <div
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        s <= step
-                          ? 'bg-gradient-to-r from-cyan-electric to-pink-accent shadow-cyan-glow'
-                          : 'bg-white/10'
-                      }`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${s <= step
+                        ? 'bg-gradient-to-r from-cyan-electric to-pink-accent shadow-cyan-glow'
+                        : 'bg-white/10'
+                        }`}
                     />
                     <span className="text-[10px] font-mono text-text-dim text-center">
                       Step 0{s}
@@ -398,11 +397,10 @@ export const HelpMeChooseWizard: React.FC = () => {
                     <div
                       key={service.id}
                       onClick={() => handleApplyRecommendation(rec)}
-                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col gap-2 group ${
-                        index === 0
-                          ? 'bg-cyan-electric/10 border-cyan-electric shadow-cyan-glow'
-                          : 'bg-white/5 border-white/10 hover:border-cyan-electric/40'
-                      }`}
+                      className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col gap-2 group ${index === 0
+                        ? 'bg-cyan-electric/10 border-cyan-electric shadow-cyan-glow'
+                        : 'bg-white/5 border-white/10 hover:border-cyan-electric/40'
+                        }`}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-center gap-3">
@@ -471,7 +469,7 @@ export const HelpMeChooseWizard: React.FC = () => {
                           ))}
                         </div>
                         <span className="text-xs font-bold text-cyan-electric flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                          <span>Rotate & Inspect</span>
+                          <span>Rotate & Explore in 3D</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>

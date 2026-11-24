@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/site.config';
-import { Clock, CheckCircle } from 'lucide-react';
+import { Clock, CheckCircle, ArrowRight, ArrowDown, UserCheck } from 'lucide-react';
 
 export const ProcessSection: React.FC = () => {
   return (
@@ -73,6 +73,43 @@ export const ProcessSection: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Process Interlinking Transition */}
+      <div className="mt-16 p-6 rounded-2xl bg-void-surface/75 border border-cyan-electric/25 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-cyan-electric/15 border border-cyan-electric/30 flex items-center justify-center text-cyan-electric shrink-0">
+            <UserCheck className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-sm font-bold text-white">Ready to Kick Off Step 1?</h3>
+            <p className="text-xs text-text-secondary">Start with a 15-minute discovery call to map out technical bottlenecks before writing any code.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <a
+            href="#contact"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-cyan-glow"
+          >
+            <span>Book Discovery Call</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#engagement"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+          >
+            <span>Engagement Models</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="#about"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-text-secondary hover:text-white transition-all flex items-center gap-1.5"
+          >
+            <span>About Founder</span>
+            <ArrowDown className="w-3.5 h-3.5" />
+          </a>
+        </div>
       </div>
     </section>
   );

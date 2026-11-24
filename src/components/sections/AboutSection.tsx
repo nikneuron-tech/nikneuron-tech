@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/site.config';
-import { FileText, ArrowUpRight } from 'lucide-react';
+import { FileText, ArrowUpRight, ArrowRight, ArrowDown, MessageSquare } from 'lucide-react';
 import { soundEngine } from '../ui/audio';
 import { useAppStore } from '../../store/useAppStore';
 
@@ -88,6 +88,33 @@ export const AboutSection: React.FC = () => {
             <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-emerald-300">
               Edge Computer Vision
             </span>
+          </div>
+
+          {/* Connected Action Links */}
+          <div className="pt-5 border-t border-white/10 flex flex-wrap items-center gap-3">
+            <a
+              href="#contact"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-electric text-void hover:opacity-90 transition-all flex items-center gap-1.5 shadow-cyan-glow"
+            >
+              <span>Work Directly with Aditya</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="#engagement"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
+            >
+              <span>Collaboration Models</span>
+              <ArrowDown className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href={SITE_CONFIG.contact.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 hover:bg-emerald-500 hover:text-void transition-all flex items-center gap-1.5"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>

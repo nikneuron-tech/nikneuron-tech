@@ -15,6 +15,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { getServiceByIndex, getServiceById } from '../../config/services.config';
+import { getProjectById } from '../../config/projects.config';
 import { useAppStore } from '../../store/useAppStore';
 import { soundEngine } from '../ui/audio';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
@@ -33,6 +34,7 @@ export const FacePanel: React.FC = () => {
     openCompare,
     setLiveAnnouncement,
     startInquiry,
+    setSelectedProjectId,
   } = useAppStore();
 
   const prefersReduced = useReducedMotion();
@@ -433,6 +435,64 @@ export const FacePanel: React.FC = () => {
               </div>
             </div>
 
+            {/* Associated Proven Projects / Case Studies */}
+            {service.projectIds && service.projectIds.length > 0 && (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-cyan-electric" />
+                    <h2 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+                      Proven In Real Systems
+                    </h2>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleClose();
+                      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-xs font-mono text-cyan-electric hover:underline cursor-pointer"
+                  >
+                    View All Case Studies →
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {service.projectIds.map((projId) => {
+                    const proj = getProjectById(projId);
+                    if (!proj) return null;
+                    return (
+                      <button
+                        key={projId}
+                        type="button"
+                        onClick={() => {
+                          handleClose();
+                          setSelectedProjectId(proj.id);
+                        }}
+                        className="text-left p-3.5 rounded-xl bg-void-surface/50 border border-cyan-electric/25 hover:border-cyan-electric hover:bg-cyan-electric/10 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-bold text-white group-hover:text-cyan-electric transition-colors">
+                            {proj.title}
+                          </span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-text-dim">
+                            {proj.status}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-text-secondary line-clamp-2 leading-relaxed">
+                          {proj.tagline}
+                        </p>
+                        <span className="text-[10px] font-mono font-semibold text-cyan-electric flex items-center gap-1 mt-1 group-hover:translate-x-0.5 transition-transform">
+                          <span>View Architecture & Specs</span>
+                          <span>→</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Service Tags */}
             <div className="flex flex-col gap-2 pt-2 border-t border-white/5">
               <span className="text-[11px] font-mono text-text-dim uppercase tracking-wider">
@@ -448,6 +508,40 @@ export const FacePanel: React.FC = () => {
                   </span>
                 ))}
               </div>
+            </div>
+
+            {/* Bottom Quick-Jump Section Navigation */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-white/10 text-xs font-mono">
+              <button
+                type="button"
+                onClick={() => {
+                  handleClose();
+                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-left text-text-secondary hover:text-cyan-electric transition-colors cursor-pointer"
+              >
+                ← Browse All 8 Services
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  handleClose();
+                  document.getElementById('bundles')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-left text-text-secondary hover:text-pink-accent transition-colors cursor-pointer"
+              >
+                View Ready Bundles ↓
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  handleClose();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-left text-cyan-electric hover:text-white transition-colors cursor-pointer"
+              >
+                Start Direct Inquiry →
+              </button>
             </div>
           </div>
         </motion.aside>

@@ -100,8 +100,8 @@ export const useAppStore = create<AppState>((set, get) => {
   const initialRecents = loadLocalStorage<string[]>('nikneuron_recently_viewed', []);
 
   return {
-    introSeen: introPreviouslySeen,
-    isIntroActive: !introPreviouslySeen,
+    introSeen: true,
+    isIntroActive: false,
     activeFaceIndex: null,
     frontFaceIndex: 4, // Default front face (+Z: Future Interfaces)
     isDraggingCube: false,

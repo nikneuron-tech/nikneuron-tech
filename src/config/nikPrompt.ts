@@ -1,5 +1,4 @@
-import { ALL_SERVICES_CONFIG, BUNDLE_PACKAGES } from './services.config';
-import { SITE_CONFIG } from './site.config';
+import { compileKnowledgeBasePrompt } from './nikKnowledgeBase';
 
 export const NIK_SYSTEM_PROMPT = `You are Nik, a friendly, practical assistant. Your job is to help the user get things done.
 
@@ -22,20 +21,4 @@ Limits:
 - Don't help with anything illegal or harmful.
 - Don't claim to have done things you can't do, such as browsing the web or running code, unless a tool is actually provided.`;
 
-export const NIK_SITE_CONTEXT = `Nikneuron Reference Facts (use only these verified facts when answering about Nikneuron; never invent prices or links):
-- Brand: ${SITE_CONFIG.brandName} — ${SITE_CONFIG.tagline}
-- Founder: ${SITE_CONFIG.founder.name} (${SITE_CONFIG.founder.role})
-- Contact Email: ${SITE_CONFIG.contact.email}
-- WhatsApp: ${SITE_CONFIG.contact.whatsappNumber} (${SITE_CONFIG.contact.whatsappUrl})
-- Reply commitment: ${SITE_CONFIG.contact.replyTimeCommitment}
-
-Services:
-${ALL_SERVICES_CONFIG.map(
-  (s, idx) => `${idx + 1}. ${s.title}: ${s.tagline}. Key deliverables: ${s.benefits.slice(0, 4).join('; ')}.`
-).join('\n')}
-
-Bundle Packages:
-${BUNDLE_PACKAGES.map(
-  (b) => `- ${b.name} (${b.tagline}): includes ${b.included.join(' + ')}`
-).join('\n')}`;
-
+export const NIK_SITE_CONTEXT = compileKnowledgeBasePrompt();
